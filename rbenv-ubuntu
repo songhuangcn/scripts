@@ -1,0 +1,17 @@
+# remove the old version rbenv
+sudo remove --purge -y rbenv
+sudo mv ~/.rbenv ~/.rbenv.bak
+
+# Check out rbenv into ~/.rbenv.
+git clone https://github.com/rbenv/rbenv.git ~/.rbenv
+
+# Optionally, try to compile dynamic bash extension to speed up rbenv. Don't worry if it fails; rbenv will still work normally
+cd ~/.rbenv && src/configure && make -C src
+
+# Add ~/.rbenv/bin to your $PATH for access to the rbenv command-line utility.
+sudo echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> /etc/profile
+sudo echo 'eval "$(rbenv init -)"' >> /etc/profile
+source /etc/source
+
+# install ruby-build
+git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
