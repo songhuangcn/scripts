@@ -1,6 +1,9 @@
 # remove the old version rbenv
-sudo remove --purge -y rbenv
+sudo apt-get remove --purge -y rbenv
 sudo mv ~/.rbenv ~/.rbenv.bak
+
+# check and install the dependent app
+sudo apt-get install git -y
 
 # Check out rbenv into ~/.rbenv.
 git clone https://github.com/rbenv/rbenv.git ~/.rbenv
