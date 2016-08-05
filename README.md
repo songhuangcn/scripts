@@ -5,7 +5,7 @@
 Setup The Development Environment of Rails By A Script.
 ```
 # System Version: Ubuntu 14.04.
-curl -sSL http://urlis.cn/rails_setup | bash
+curl -sSL http://urlis.cn/rails-setup | bash
 ```
 ## Dependence
 ```
