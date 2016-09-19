@@ -1,5 +1,3 @@
-[TOC]
-
 # rails-setup.sh
 ## Use
 Setup The Development Environment of Rails By A Script.
