@@ -7,6 +7,10 @@ sudo apt-get install -y git-core curl zlib1g-dev build-essential libssl-dev libr
 cd ~
 git clone https://github.com/rbenv/rbenv.git ~/.rbenv
 git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
+git clone https://github.com/andorchen/rbenv-china-mirror.git ~/.rbenv/plugins/rbenv-china-mirror
+
+cd ~/.rbenv && src/configure && make -C src
+
 echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
 echo 'eval "$(rbenv init -)"' >> ~/.bashrc
 exec $SHELL
@@ -16,15 +20,35 @@ rbenv global 2.3.1
 ruby -v
 
 
-######################
-#  Installing Rails  #
-######################
-sudo apt-get install -y nodejs
-gem install rails 5.0.0
-rails -v
+################
+#  Config Git  #
+################
+git config --global color.ui true
+git config --global user.name "pinewong"
+git config --global user.email "pinewong@163.com"
 
 
-###########################
-#  Setting Up PostgreSQL  #
-###########################
-sudo apt-get install -y postgresql libpq-dev
+#################
+#  Gem Sources  #
+#################
+gem -v
+gem sources --add https://gems.ruby-china.org/ --remove https://rubygems.org/
+gem sources -l
+gem update --system
+gem -v
+
+
+########################
+#  Installing Bundler  #
+########################
+gem install bundler
+bundle config mirror.https://rubygems.org https://gems.ruby-china.org
+bundler -v
+
+
+#########################
+#  Setting Up Database  #
+#########################
+# sudo apt-get install -y postgresql libpq-dev
+# sudo apt-get install mysql-server mysql-client libmysqlclient-dev
+sudo apt-get install mysql-server libmysqlclient-dev
