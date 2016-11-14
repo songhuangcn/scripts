@@ -1,28 +1,45 @@
-# rails-setup.sh
-## Use
+## Rails setup
+
+### Use
+
 Setup The Development Environment of Rails By A Script.
+
 ```
 # System Version: Ubuntu 14.04.
-curl -sSL http://urlis.cn/rails-setup | bash
+curl -sSL https://raw.githubusercontent.com/pinewong/script/master/rails_setup.sh | bash
 ```
-## Dependence
+
+### Dependence
+
 ```
 Ruby: 2.3.1
 Rails: 5.0.0
 Lib: git-core, curl, zlib1g-dev, build-essential, libssl-dev, libreadline-dev, libyaml-dev, libsqlite3-dev, sqlite3, libxml2-dev, libxslt1-dev, libcurl4-openssl-dev, python-software-properties, libffi-dev
 Else: Rbenv, Ruby-build(rbenv plugin), PostgreSQL
 ```
+## Ubuntu setup
 
-# rails-config-development.sh
-## Use
-Configuring The Development Environment of Rails By A Script.
+### Use
+
 ```
-# System Version: Ubuntu 14.04.
-curl -sSL http://urlis.cn/rails-config-development | bash
+# System Version: Ubuntu 14.04+.
+curl -sSL https://raw.githubusercontent.com/pinewong/script/master/ubuntu_setup.sh | bash
 ```
-## Mirrors Of China
+
+## Docker setup
+
+### Use
+
+- Ubuntu
+
 ```
-gem sources --add https://gems.ruby-china.org/ --remove https://rubygems.org/ --remove http://rubygems.org/
-bundle config mirror.https://rubygems.org https://gems.ruby-china.org
+# System Version: Ubuntu 14.04+.
+curl -sSL https://raw.githubusercontent.com/pinewong/script/master/docker_setup_centos.sh | bash
 ```
-See more at [Ruby-China Gems](https://gems.ruby-china.org/)
+
+- CentOS
+
+```
+# System Version: Ubuntu 14.04+.
+curl -sSL https://raw.githubusercontent.com/pinewong/script/master/docker_setup_centos.sh | bash
+```
