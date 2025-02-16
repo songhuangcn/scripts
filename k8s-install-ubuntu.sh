@@ -49,3 +49,6 @@ sudo apt-get install -y kubelet kubeadm kubectl
 sudo apt-mark hold kubelet kubeadm kubectl
 
 sudo kubeadm init --cri-socket=unix:///var/run/cri-dockerd.sock --pod-network-cidr=192.168.0.0/16
+
+# 安装 k8s 后，会修改防火墙配置，导致防火墙失效，此时要重启 docker 解决
+sudo systemctl restart docker
