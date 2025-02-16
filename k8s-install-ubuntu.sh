@@ -5,12 +5,22 @@ curl -fsSL https://get.docker.com -o get-docker.sh
 sudo sh get-docker.sh
 sudo systemctl status docker
 
+##
+# container
+#
+sudo sh -c "containerd config default > /etc/containerd/config.toml"
+sudo vi /etc/containerd/config.toml
+
+# SystemdCgroup = true
+# sandbox_image = "registry.k8s.io/pause:3.10"
+sudo systemctl restart containerd
+
 # 获取最新版本号（例如 v0.3.9）
 CRI_DOCKERD_VERSION=$(curl -s https://api.github.com/repos/Mirantis/cri-dockerd/releases/latest | grep 'tag_name' | cut -d '"' -f 4)
 
 # 下载并解压
-wget https://github.com/Mirantis/cri-dockerd/releases/download/${CRI_DOCKERD_VERSION}/cri-dockerd-${CRI_DOCKERD_VERSION#v}.arm64.tgz
-tar xvf cri-dockerd-${CRI_DOCKERD_VERSION#v}.arm64.tgz
+wget https://github.com/Mirantis/cri-dockerd/releases/download/${CRI_DOCKERD_VERSION}/cri-dockerd-${CRI_DOCKERD_VERSION#v}.amd64.tgz
+tar xvf cri-dockerd-${CRI_DOCKERD_VERSION#v}.amd64.tgz
 
 # 移动二进制文件到系统路径
 sudo mv cri-dockerd/cri-dockerd /usr/local/bin/
@@ -49,6 +59,12 @@ sudo apt-get install -y kubelet kubeadm kubectl
 sudo apt-mark hold kubelet kubeadm kubectl
 
 sudo kubeadm init --cri-socket=unix:///var/run/cri-dockerd.sock --pod-network-cidr=192.168.0.0/16
+sudo kubeadm init --pod-network-cidr=192.168.0.0/16
 
 # 安装 k8s 后，会修改防火墙配置，导致防火墙失效，此时要重启 docker 解决
 sudo systemctl restart docker
+
+# 清理集群
+sudo kubeadm reset --cri-socket=unix:///var/run/cri-dockerd.sock
+iptables -F && iptables -t nat -F && iptables -t mangle -F && iptables -X
+
